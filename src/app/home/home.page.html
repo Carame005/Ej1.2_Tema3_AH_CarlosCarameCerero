@@ -2,14 +2,15 @@
   <ion-toolbar color="primary">
     <ion-title>Cádiz</ion-title>
     <ion-buttons slot="end">
-      <ion-button routerLink="/list/servicios">Servicios</ion-button>
-      <ion-button routerLink="/list/restaurantes">Restaurantes</ion-button>
-      <ion-button routerLink="/list/hoteles">Hoteles</ion-button>
-      <ion-button routerLink="/list/clinicas">Clínicas</ion-button>
-      <ion-button routerLink="/list/perfil" color="tertiary">Perfil</ion-button>
-      <ion-button routerLink="/list/datos" color="medium">Datos</ion-button>
-      <ion-button routerLink="/list/cliente" color="success">Cliente</ion-button>
-      <ion-button routerLink="/list/calculadora" color="warning">Calculadora</ion-button>
+  <ion-button routerLink="/list/servicios">Servicios</ion-button>
+  <ion-button routerLink="/list/restaurantes">Restaurantes</ion-button>
+  <ion-button routerLink="/list/hoteles">Hoteles</ion-button>
+  <ion-button routerLink="/list/clinicas">Clínicas</ion-button>
+  <ion-button routerLink="/list/perfil" color="tertiary">Perfil</ion-button>
+  <ion-button routerLink="/list/datos" color="medium">Datos</ion-button>
+  <ion-button routerLink="/list/cliente" color="success">Cliente</ion-button>
+  <ion-button routerLink="/list/datos-cliente" color="success">Datos Cliente</ion-button>
+  <ion-button routerLink="/list/calculadora" color="warning">Calculadora</ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -26,7 +27,26 @@
       <span *ngIf="milestoneMsg">{{ milestoneMsg }}</span>
     </div>
 
-    <!-- Componente Counter (opcional mostrar aquí) -->
+    <!-- Componente Counter -->
     <app-counter [count]="parentCount" (milestone)="onMilestoneReached($event)"></app-counter>
+
+    <!-- Inputs y calculadora -->
+    <div class="controls-row" style="margin-top: 1em; align-items: flex-end; flex-wrap: wrap;">
+      <ion-input type="number" placeholder="Valor A" [(ngModel)]="valorA" style="max-width:90px;"></ion-input>
+      <ion-input type="number" placeholder="Valor B" [(ngModel)]="valorB" style="max-width:90px;"></ion-input>
+      <ion-button size="small" (click)="calcularDesdePadre()">Calcular</ion-button>
+      <span *ngIf="resultados">
+        Suma: {{ resultados['suma'] }} |
+        Resta: {{ resultados['resta'] }} |
+        Mult: {{ resultados['multiplicacion'] }} |
+        Div: {{ resultados['division'] }}
+      </span>
+    </div>
+    <app-calculadora
+      [valorA]="valorA || 0"
+      [valorB]="valorB || 0"
+      (resultados)="onResultados($event)"
+      #calc>
+    </app-calculadora>
   </ion-toolbar>
 </ion-footer>

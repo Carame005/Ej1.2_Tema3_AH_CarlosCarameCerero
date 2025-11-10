@@ -28,10 +28,12 @@
 <ion-footer>
   <ion-toolbar>
     <div *ngIf="resultados" class="ion-padding">
-      <p><strong>Suma:</strong> {{ resultados['suma'] }}</p>
-      <p><strong>Resta:</strong> {{ resultados['resta'] }}</p>
-      <p><strong>Multiplicación:</strong> {{ resultados['multiplicacion'] }}</p>
-      <p><strong>División:</strong> {{ resultados['division'] }}</p>
+      <p><strong>Valor A:</strong> {{ valorA }}</p>
+      <p><strong>Valor B:</strong> {{ valorB }}</p>
+      <p>Suma*{{ resultados['suma'] }}</p>
+      <p>Resta*{{ resultados['resta'] }}</p>
+      <p>Multiplicación*{{ resultados['multiplicacion'] }}</p>
+      <p>División*{{ resultados['division'] }}</p>
     </div>
   </ion-toolbar>
 </ion-footer>

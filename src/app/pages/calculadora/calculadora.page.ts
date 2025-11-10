@@ -16,11 +16,13 @@ export class CalculadoraPage {
   resultados: { [key: string]: number | null } = {};
 
   calcular() {
+    const a = Number(this.valorA);
+    const b = Number(this.valorB);
     this.resultados = {
-      suma: this.valorA + this.valorB,
-      resta: this.valorA - this.valorB,
-      multiplicacion: this.valorA * this.valorB,
-      division: this.valorB !== 0 ? this.valorA / this.valorB : null
+      suma: !isNaN(a) && !isNaN(b) ? a + b : null,
+      resta: !isNaN(a) && !isNaN(b) ? a - b : null,
+      multiplicacion: !isNaN(a) && !isNaN(b) ? a * b : null,
+      division: !isNaN(a) && !isNaN(b) && b !== 0 ? a / b : null
     };
   }
 }

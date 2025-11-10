@@ -2,7 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterLink, RouterOutlet } from '@angular/router';
-import { IonCard, IonCardHeader, IonCardTitle, IonCardContent } from '@ionic/angular/standalone';
+// ...existing code...
 import {
   IonHeader, IonToolbar, IonTitle, IonButtons, IonButton,
   IonContent, IonItem, IonLabel, IonInput, IonRouterOutlet, IonFooter
@@ -33,9 +33,9 @@ interface Resultados {
     IonInput,
     IonRouterOutlet,
     IonFooter,
-    CounterComponent,
-    CalculadoraComponent,
-    IonCard, IonCardHeader, IonCardTitle, IonCardContent
+  CounterComponent,
+  CalculadoraComponent
+  // ...existing code...
   ],
   templateUrl: './home.page.html',
   styleUrls: ['./home.page.scss']
@@ -50,7 +50,7 @@ export class HomePage {
   valorB: number | null = null;
   resultados?: Resultados;
 
-  @ViewChild(CalculadoraComponent) calculadora!: CalculadoraComponent;
+  @ViewChild('calc') calculadora: any;
 
   // Visibilidad de la calculadora en el footer
 showCalculadora = false;
@@ -71,15 +71,17 @@ toggleCalculadora() {
     setTimeout(() => this.milestoneMsg = '', 3000);
   }
 
-  // Envía los valores a la calculadora
-  onCalcular() {
-    if (this.valorA !== null && this.valorB !== null) {
-      this.calculadora.calcular();
-    }
-  }
+  // ...existing code...
 
   // Recibe los resultados del hijo (calculadora)
   onResultados(res: Resultados) {
     this.resultados = res;
+  }
+
+  // Llama al método calcular() del hijo
+  calcularDesdePadre() {
+    if (this.calculadora && this.calculadora.calcular) {
+      this.calculadora.calcular();
+    }
   }
 }
