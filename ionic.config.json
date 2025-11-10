@@ -1,0 +1,7 @@
+{
+  "name": "Ej1_Tema3_AH_CarlosCarameCerero",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
