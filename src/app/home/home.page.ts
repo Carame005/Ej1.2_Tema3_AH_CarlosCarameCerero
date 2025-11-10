@@ -1,12 +1,85 @@
-import { Component } from '@angular/core';
-import { IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/angular/standalone';
+import { Component, ViewChild } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { RouterLink, RouterOutlet } from '@angular/router';
+import { IonCard, IonCardHeader, IonCardTitle, IonCardContent } from '@ionic/angular/standalone';
+import {
+  IonHeader, IonToolbar, IonTitle, IonButtons, IonButton,
+  IonContent, IonItem, IonLabel, IonInput, IonRouterOutlet, IonFooter
+} from '@ionic/angular/standalone';
+import { CounterComponent } from '../components/counter/counter.component';
+import { CalculadoraComponent } from '../components/calculadora/calculadora.component';
+
+interface Resultados {
+  [key: string]: any;
+}
 
 @Component({
+  standalone: true,
   selector: 'app-home',
-  templateUrl: 'home.page.html',
-  styleUrls: ['home.page.scss'],
-  imports: [IonHeader, IonToolbar, IonTitle, IonContent],
+  imports: [
+    CommonModule,
+    FormsModule,
+    RouterLink,
+    RouterOutlet,
+    IonHeader,
+    IonToolbar,
+    IonTitle,
+    IonButtons,
+    IonButton,
+    IonContent,
+    IonItem,
+    IonLabel,
+    IonInput,
+    IonRouterOutlet,
+    IonFooter,
+    CounterComponent,
+    CalculadoraComponent,
+    IonCard, IonCardHeader, IonCardTitle, IonCardContent
+  ],
+  templateUrl: './home.page.html',
+  styleUrls: ['./home.page.scss']
 })
 export class HomePage {
-  constructor() {}
+  // Contador
+  parentCount = 0;
+  milestoneMsg = '';
+
+  // Calculadora
+  valorA: number | null = null;
+  valorB: number | null = null;
+  resultados?: Resultados;
+
+  @ViewChild(CalculadoraComponent) calculadora!: CalculadoraComponent;
+
+  // Visibilidad de la calculadora en el footer
+showCalculadora = false;
+
+// Método para alternar visibilidad
+toggleCalculadora() {
+  this.showCalculadora = !this.showCalculadora;
+}
+
+  // Incrementa el contador
+  incrementFromParent() {
+    this.parentCount++;
+  }
+
+  // Recibe el número del evento del contador
+  onMilestoneReached(n: number) {
+    this.milestoneMsg = `Ha llegado al ${n}`;
+    setTimeout(() => this.milestoneMsg = '', 3000);
+  }
+
+  // Envía los valores a la calculadora
+  onCalcular() {
+    if (this.valorA !== null && this.valorB !== null) {
+      this.calculadora.calcular();
+    }
+  }
+
+  // Recibe los resultados del hijo (calculadora)
+  onResultados(res: Resultados) {
+    this.resultados = res;
+  }
 }

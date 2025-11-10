@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Datos Cliente</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div *ngIf="cliente; else sinDatos">
+    <h3>Datos guardados</h3>
+  <p><strong>Nombre:</strong> {{ cliente?.nombre }}</p>
+  <p><strong>Apellido:</strong> {{ cliente?.apellido }}</p>
+  <p><strong>Email:</strong> {{ cliente?.email }}</p>
+  <p><strong>Nacionalidad:</strong> {{ cliente?.nacionalidad }}</p>
+  </div>
+
+  <ng-template #sinDatos>
+    <p>No hay datos guardados. Guarda un cliente en la ruta <em>Cliente</em>.</p>
+  </ng-template>
+</ion-content>

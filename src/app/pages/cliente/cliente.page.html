@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Cliente</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form [formGroup]="clienteForm" (ngSubmit)="guardar()">
+    <ion-item>
+      <ion-label position="floating">Nombre</ion-label>
+      <ion-input formControlName="nombre"></ion-input>
+    </ion-item>
+    <ion-note color="danger" *ngIf="clienteForm.get('nombre')?.touched && clienteForm.get('nombre')?.invalid">Requerido</ion-note>
+
+    <ion-item>
+      <ion-label position="floating">Apellido</ion-label>
+      <ion-input formControlName="apellido"></ion-input>
+    </ion-item>
+    <ion-note color="danger" *ngIf="clienteForm.get('apellido')?.touched && clienteForm.get('apellido')?.invalid">Requerido</ion-note>
+
+    <ion-item>
+      <ion-label position="floating">Email</ion-label>
+      <ion-input formControlName="email" type="email"></ion-input>
+    </ion-item>
+    <ion-note color="danger" *ngIf="clienteForm.get('email')?.touched && clienteForm.get('email')?.invalid">
+      <span *ngIf="clienteForm.get('email')?.errors?.['required']">Requerido.</span>
+      <span *ngIf="clienteForm.get('email')?.errors?.['email']">Formato de email no válido.</span>
+    </ion-note>
+
+    <ion-item>
+      <ion-label position="floating">Nacionalidad</ion-label>
+      <ion-input formControlName="nacionalidad"></ion-input>
+    </ion-item>
+    <ion-note color="danger" *ngIf="clienteForm.get('nacionalidad')?.touched && clienteForm.get('nacionalidad')?.invalid">Requerido</ion-note>
+
+    <ion-button expand="block" type="submit" class="ion-margin-top">Guardar</ion-button>
+  </form>
+</ion-content>
